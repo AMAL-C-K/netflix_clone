@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Detail Page</title>
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</head>
+<body class='font-primary'>
+    <nav class="flex justify-between items-center py-3 px-4 fixed w-full z-50">
+        <div class="w-6/12">
+            <img src="{% static 'assets/netflix.png' %}" alt="logo" class="w-5/12 md:w-2/12">
+        </div>
+
+        <div>
+            <button class='bg-primary_red py-1 px-3 text-white md:text-lg rounded-md'>
+                Log out
+            </button>
+        </div>
+        
+    </nav>
+    <main class='bg-primary_black min-h-screen w-full'>
+        <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex justify-end items-end bg-cover" style="background-image: url('{{ movie.image.url }}');">
+            <div>
+                <h2 class="text-6xl font-semibold text-white my-4" style="font-weight: bolder;">
+                    {{movie.title}}
+                </h2>
+                <p class=" w-11/12 md:w-5/12 font-medium text-black my-4" style="background: white;">
+                    {{movie.description}}               
+                 </p>
+                 <div class="flex my-4">
+
+                    <a href="{% url 'play-movie' movie_id=movie.uuid %}"><button class="flex items-center bg-white py-2 px-5 rounded-md">
+                        <ion-icon name="play" class="text-2xl"></ion-icon>
+                        <span class="ml-3 font-medium">
+                            Play
+                        </span>
+                    </button></a>    
+                </div>
+            </div>
+        </section> 
+        <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
+            <div class="p-8 w-10/12 relative"  >
+                <h2 class="text-gray-200 text-3xl font-medium" >
+                    Description
+                </h2>
+                <div class="flex justify-center  items-center min-w-full  movie_list">
+                    <p class="text-gray-100 text-lg">
+                        {{movie.description}}
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    <script>
+        const nav = document.querySelector('nav')
+
+        document.addEventListener("scroll",e=>{
+            
+            if(scrollY>200){
+                nav.classList.add('bg-gray-900')
+          
+            }else{
+                nav.classList.remove('bg-gray-900')
+                
+            }
+        })
+
+    </script>
+</body>
+</html>
